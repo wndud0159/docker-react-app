@@ -11,7 +11,7 @@ branches:
 
 bofore_install:
   - echo "Start creating an image with dockerfile"
-  - docker build -t react-test ./
+  - docker build -t react-test -f Dockerfile.dev ./
 
 script:
   - docker run -e CI=true react-test npm run test -- --coverage
