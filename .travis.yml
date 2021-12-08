@@ -14,7 +14,7 @@ bofore_install:
   - docker build -t react-test -f Dockerfile.dev ./
 
 script:
-  - docker run -e CI-true react-test npm run test -- --coverage
+  - docker run -e CI=true react-test npm run test -- --coverage
 
 after_success:
   - echo "Test success"
