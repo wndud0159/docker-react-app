@@ -5,6 +5,10 @@ language: generic
 services:
   - docker
 
+branches:
+  only:
+  - main
+
 bofore_install:
   - echo "Start creating an image with dockerfile"
   - docker build -t react-test -f Dockerfile.dev
