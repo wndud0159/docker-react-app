@@ -1,4 +1,4 @@
-# sudo: required
+sudo: required
 
 language: generic
 
@@ -11,7 +11,7 @@ branches:
 
 bofore_install:
   - echo "Start creating an image with dockerfile"
-  - docker build -t react-test -f Dockerfile.dev ./
+  - docker build -t react-test ./
 
 script:
   - docker run -e CI=true react-test npm run test -- --coverage
@@ -21,3 +21,16 @@ after_success:
 
 after_failure:
   - echo "Test fail.."
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "react-app-deploy-test"
+  env: "Reactappdeploytest-env"
+  bucket_name: "elasticbeanstalk-us-east-1-276223326741"
+  bucket_path: "docker-app-deploy-test"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
